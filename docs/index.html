@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>logipa</title>
+<link href="/logipa/_asset/style.css" rel="stylesheet">
+<script src="/logipa/_asset/script.js"></script>
+</head>
+<body>
+
+<header class="container">
+<h1>logipa</h1>
+
+<nav class="list-group">
+<a href="#id2_1" class="list-group-item">概要</a>
+<a href="#id2_2" class="list-group-item">特徴</a>
+<a href="#id2_3" class="list-group-item">クイックスタート</a>
+<a href="#id2_4" class="list-group-item">GitHubリポジトリ</a>
+<a href="#id2_5" class="list-group-item">ドキュメント</a>
+</nav>
+</header>
+
+<article class="container">
+<h2><a name="id2_1"></a>概要</h2>
+
+<p>　シンプルな HTTPサーバです。<br/>
+　静的な表示のみ対応しています。要求アドレスのパスに応じてファイルシステム上のファイル内容を返します。</p>
+
+<p>　個人が自学自習を目的として開発したものであり、故障対応や問合せ回答といったサポートはいっさいしていません。</p>
+
+<h2><a name="id2_2"></a>特徴</h2>
+
+<ul>
+<li>HTTPメソッドは GETのみ対応しています。</li>
+<li>設定は Groovy DSLで記述します。</li>
+<li>HTTPサーバとしての処理には Javaの com.sun.net.httpserverパッケージを利用しています。</li>
+</ul>
+
+<h2><a name="id2_3"></a>クイックスタート</h2>
+
+<p>　基本的な使い方は以下のとおりです。</p>
+
+<ol>
+<li>設定ファイル conf/logipa.groovyを編集します。</li>
+<li>実行ファイル logipa.exeをダブルクリックし、コンソールを起動します。これにより HTTPサーバが起動します。</li>
+<li>コンソールを閉じると、HTTPサーバは終了します。</li>
+</ol>
+
+<p>　設定ファイルのサンプルを以下に示します。<br/>
+　ポート番号80で HTTPサーバを起動します。<br/>
+　ブラウザを起動して sample/index.htmlのファイル内容を表示します。</p>
+
+<pre class="code">
+import java.awt.Desktop
+Logipa.with {
+	// ファイルの拡張子と Content-typeとの対応を設定します
+	contentTypes.typeMap = [
+		'css': 'text/css',
+		'js': 'application/javascript',
+	]
+	
+	// ポート番号80の HTTPサーバを設定します
+	server(80).with {
+		// コンテキストパスを設定します
+		context('/').with { methods.GET.dir = new File('sample') }
+	}
+	
+	// HTTPサーバ起動後に実行する処理を設定します
+	doLast {
+		Desktop.desktop.browse(new URI('http://localhost/'))
+	}
+}
+</pre>
+
+<h2><a name="id2_4"></a>GitHubリポジトリ</h2>
+
+<ul>
+<li><a href="https://github.com/longfish801/logipa">longfish801/logipa</a></li>
+</ul>
+
+<h2><a name="id2_5"></a>ドキュメント</h2>
+
+<ul>
+<li><a href="release.html">リリースノート</a></li>
+<li><a href="user.html">ユーザガイド</a></li>
+<li><a href="developer.html">開発者ガイド</a></li>
+<li><a href="groovydoc/index.html">Groovydoc</a></li>
+</ul>
+</article>
+
+<footer class="container">
+<a href="..">戻る</a>
+</footer>
+
+</body>
+</html>

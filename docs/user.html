@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ユーザガイド</title>
+<link href="/logipa/_asset/style.css" rel="stylesheet">
+<script src="/logipa/_asset/script.js"></script>
+</head>
+<body>
+
+<header class="container">
+<h1>ユーザガイド</h1>
+
+<nav class="list-group">
+<a href="#id2_1" class="list-group-item">フォルダ構成</a>
+<a href="#id2_2" class="list-group-item">起動</a>
+<a href="#id2_3" class="list-group-item">停止</a>
+<a href="#id2_4" class="list-group-item">設定</a>
+<a href="#id2_5" class="list-group-item">ログ出力</a>
+</nav>
+</header>
+
+<article class="container">
+<h2><a name="id2_1"></a>フォルダ構成</h2>
+
+<pre>インストールフォルダ
+　├ logipa.exe　実行ファイル
+　├ logipa.l4j.ini　Javaオプション設定ファイル
+　├ conf　設定フォルダ
+　│　├ logback.xml　ログ出力設定ファイル
+　│　└ logipa.groovy　logipa設定ファイル
+　├ lib　ライブラリフォルダ。JARファイルを格納します。
+　├ log　ログフォルダ。ログファイルを格納します。
+　└ sample　サンプルフォルダ。</pre>
+
+<h2><a name="id2_2"></a>起動</h2>
+
+<p>　実行ファイル gstart.exeを実行すると、コンソールを起動します。<br/>
+　あわせて HTTPサーバを起動します。</p>
+
+<h2><a name="id2_3"></a>停止</h2>
+
+<p>　コンソールを閉じると、HTTPサーバを停止します。</p>
+
+<h2><a name="id2_4"></a>設定</h2>
+
+<p>　設定ファイル conf/logipa.groovyに DSLを記述することで設定します。<br/>
+　詳細は<a href="groovydoc/index.html">Groovydoc</a>を参照してください。</p>
+
+<h2><a name="id2_5"></a>ログ出力</h2>
+
+<p>　ログ出力に関する設定は conf/logback.xmlに記述しています。<br/>
+　デフォルトの設定では、ログは log/logipa.logに出力します。</p>
+</article>
+
+<footer class="container">
+<a href="index.html">戻る</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+
+【＃タイトル】開発者ガイド
+
+■Gradleタスク
+
+　詳細は build.gradleを参照してください。
+
+□改修
+
+　ソース改修時は以下のコマンドを実行してください。
+
+-----
+gradle clean fix
+-----
+
+　コンパイル、テスト、Groovydocの生成が実行されます。
+　Groovydocは docs/groovydocに出力されます。
+　テスト結果は build/reports配下に出力されます。
+　Jacocoプラグインによるカバレッジのレポートは build/jacocoHtml配下に出力されます。
+
+□リリース
+
+　インストールファイルを作成するには以下のコマンドを実行してください。
+
+-----
+gradle
+-----
+
+　clean, fixタスクがまず実行されます。
+　build/logipa-[version]に実行ファイルが出力されます。
+　くわえて、デフォルトの設定ファイルなどを含む src/releaseフォルダ配下の内容がコピーされます。
+　build/logipa-[version]を圧縮したファイルがインストールファイルとなります。

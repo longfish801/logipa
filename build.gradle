@@ -1,0 +1,95 @@
+/*
+ * release.gradle
+ *
+ * Copyright (C) jp.coocan.cute.longfish All Rights Reserved.
+ */
+
+plugins { 
+	id 'jacoco'
+	id 'edu.sc.seis.launch4j' version '2.3.0'
+}
+
+version = '0.1.00'
+
+defaultTasks 'clean', 'release'
+
+tasks.withType(AbstractCompile).each { it.options.encoding = 'UTF-8' }
+tasks.withType(GroovyCompile).each { it.groovyOptions.encoding = 'UTF-8' }
+tasks.withType(Javadoc).each { it.options.encoding = 'UTF-8' }
+
+apply plugin: 'groovy'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.5.3'
+	testCompile group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.5'
+	testCompile group: 'cglib', name: 'cglib-nodep', version: '3.2.12'
+	testCompile group: 'org.objenesis', name: 'objenesis', version: '3.0.1'
+}
+
+jacocoTestReport {
+	reports { html.destination file("${buildDir}/jacocoHtml") }
+}
+jacocoTestReport.dependsOn 'test'
+
+// ドキュメント生成関連のタスクです
+
+groovydoc {
+	overviewText(resources.text.fromFile('src/main/resources/overview.html'))
+	link('http://docs.oracle.com/javase/8/docs/api/', 'java.', 'javax.')
+	link('https://docs.oracle.com/javase/jp/8/docs/jre/api/net/httpserver/spec/', 'com.sun.')
+	link('http://groovy.codehaus.org/api/', 'groovy.', 'org.codehaus.groovy.')
+}
+
+task deleteGroovydoc(type: Delete){
+	delete 'docs/groovydoc'
+}
+
+task copyGroovydoc(type: Copy, dependsOn: [groovydoc, deleteGroovydoc]){
+	from "${buildDir}/docs/groovydoc"
+	into 'docs/groovydoc'
+}
+
+// srcフォルダ配下の編集後に実施すべきタスクです
+
+task fix(dependsOn: [jacocoTestReport, copyGroovydoc]){ }
+
+// 実行ファイル作成関連のタスクです
+
+jar {
+	manifest.attributes(
+		'Main-Class': 'io.github.longfish801.logipa.Logipa',
+		'Class-Path': "${configurations.runtime.files.collect { it.name }.join(' ')} ../conf/"
+	)
+}
+
+createExe {
+	jar = "lib/${tasks.jar.outputs.files[0].name}"
+	outfile = "${project.name}.exe"
+	icon = '../../src/launch4j/logipa.ico'
+	dontWrapJar = true
+	language = 'JAPANESE'
+	headerType = 'console'
+}
+
+// リリース関連のタスクです
+
+task copyExe(type: Copy, dependsOn: [createExe]){
+	from "${buildDir}/launch4j"
+	into "${buildDir}/${project.name}-${version}"
+}
+
+task copyRelease(type: Copy){
+	from 'src/release'
+	into "${buildDir}/${project.name}-${version}"
+}
+
+task release(dependsOn: [fix, copyExe, copyRelease]){
+	file("${buildDir}/${project.name}-${version}/log").mkdir()
+}

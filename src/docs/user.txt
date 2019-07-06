@@ -1,0 +1,35 @@
+
+【＃タイトル】ユーザガイド
+
+■フォルダ構成
+
+=====
+インストールフォルダ
+　├ logipa.exe　実行ファイル
+　├ logipa.l4j.ini　Javaオプション設定ファイル
+　├ conf　設定フォルダ
+　│　├ logback.xml　ログ出力設定ファイル
+　│　└ logipa.groovy　logipa設定ファイル
+　├ lib　ライブラリフォルダ。JARファイルを格納します。
+　├ log　ログフォルダ。ログファイルを格納します。
+　└ sample　サンプルフォルダ。
+=====
+
+■起動
+
+　実行ファイル gstart.exeを実行すると、コンソールを起動します。
+　あわせて HTTPサーバを起動します。
+
+■停止
+
+　コンソールを閉じると、HTTPサーバを停止します。
+
+■設定
+
+　設定ファイル conf/logipa.groovyに DSLを記述することで設定します。
+　詳細は【リンク：Groovydoc：groovydoc/index.html】を参照してください。
+
+■ログ出力
+
+　ログ出力に関する設定は conf/logback.xmlに記述しています。
+　デフォルトの設定では、ログは log/logipa.logに出力します。

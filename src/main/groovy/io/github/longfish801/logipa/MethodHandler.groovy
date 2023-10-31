@@ -21,6 +21,8 @@ trait MethodHandler {
 	File dir = new File('.')
 	/** URLにファイル名が省略されたときのデフォルト値 */
 	String defaultFilename = 'index.html'
+	/** Not Found時に表示するファイルの名前(404.html) */
+	String notFouldFilename = '404.html'
 	
 	/**
 	 * 特定メソッドについてリクエストに対しレスポンスを返します。<br/>
@@ -33,12 +35,28 @@ trait MethodHandler {
 	MethodHandler method(HttpExchange exchange){
 		File file = getFile(exchange)
 		LOG.debug('method file={} requestURI={}', file, exchange.requestURI)
-		if (!file.isFile()) {
-			// パスに対応するファイルが存在しなければ 404 Not Foundを返します
+		if (!file.isFile()) return handleNotFound(exchange, file)
+		response(exchange, file, ContentTypeJudge.judge(file))
+		return this
+	}
+
+	/**
+	 * リクエストに対応するファイルがないときの処理をします。<br/>
+	 * Not Found時に表示するファイルがなければ 404 Not Foundを返します。<br/>
+	 * 存在するときはそのファイルの内容をレスポンスとします。
+	 * @param exchange HttpExchange
+	 * @param file リクエストに対応するファイル
+	 * @return 自インスタンス
+	 */
+	private MethodHandler handleNotFound(HttpExchange exchange, File file){
+		File notFoundFile = new File(dir, notFouldFilename)
+		if (!notFoundFile.isFile()){
+			//  Not Found時に表示するファイルがなければ 404 Not Foundを返します
 			LOG.warn('404 Not Found, {} {}, filepath={}', exchange.requestMethod, exchange.requestURI, file.path)
 			exchange.sendResponseHeaders(404, 0)
 		} else {
-			response(exchange, file, ContentTypeJudge.judge(file))
+			//  存在するときはそのファイルの内容をレスポンスとします
+			response(exchange, notFoundFile, ContentTypeJudge.judge(notFoundFile))
 		}
 		return this
 	}

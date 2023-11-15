@@ -75,6 +75,7 @@ createExe {
 	icon = '../../src/launch4j/logipa.ico'
 	dontWrapJar = true
 	language = 'JAPANESE'
+	headerType  = 'console'
 }
 
 // リリース関連のタスクです

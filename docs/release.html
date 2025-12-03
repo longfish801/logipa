@@ -1,60 +1,66 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>リリースノート</title>
-<link href="/logipa/_asset/style.css" rel="stylesheet">
-<script src="/logipa/_asset/script.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>リリースノート</title>
+	<link href="/logipa/_asset/style.css" rel="stylesheet">
+	<script src="/logipa/_asset/script.js"></script>
 </head>
+
 <body>
 
-<header class="container">
-<h1>リリースノート</h1>
+	<header class="container">
+		<h1>リリースノート</h1>
 
-<nav class="list-group">
-<a href="#id2_1" class="list-group-item">ダウンロード</a>
-<a href="#id2_2" class="list-group-item">必要な環境</a>
-<a href="#id2_3" class="list-group-item">インストール</a>
-<a href="#id2_4" class="list-group-item">更新履歴</a>
-</nav>
-</header>
+		<nav class="list-group">
+			<a href="#id2_1" class="list-group-item">ダウンロード</a>
+			<a href="#id2_2" class="list-group-item">必要な環境</a>
+			<a href="#id2_3" class="list-group-item">インストール</a>
+			<a href="#id2_4" class="list-group-item">更新履歴</a>
+		</nav>
+	</header>
 
-<article class="container">
-<h2><a name="id2_1"></a>ダウンロード</h2>
+	<article class="container">
+		<h2><a name="id2_1"></a>ダウンロード</h2>
 
-<ul>
-<li><a href="release/logipa-0.1.00.zip">logipa-0.1.00.zip</a></li>
-</ul>
+		<ul>
+			<li><a href="release/logipa-0.2.00.zip">logipa-0.2.00.zip</a></li>
+		</ul>
 
-<h2><a name="id2_2"></a>必要な環境</h2>
+		<h2><a name="id2_2"></a>必要な環境</h2>
 
-<p>　以下の環境での実行を想定しています。</p>
+		<p>　以下の環境での実行を想定しています。</p>
 
-<ul>
-<li>Windows 10 Pro 1903</li>
-<li>Java SE Runtime Environment version 1.8.0_181</li>
-</ul>
+		<ul>
+			<li>Windows 10 Pro 1903</li>
+			<li>Java SE Runtime Environment version 1.8.0_181</li>
+		</ul>
 
-<p>　ビルドには Gradle 5.4.1が必要です。</p>
+		<p>　ビルドには Gradle 5.4.1が必要です。</p>
 
-<h2><a name="id2_3"></a>インストール</h2>
+		<h2><a name="id2_3"></a>インストール</h2>
 
-<p>　インストールファイル logipa-[version].zipをダウンロードしてください。<br/>
-　インストールファイルを任意のフォルダに解凍してください。</p>
+		<p>　インストールファイル logipa-[version].zipをダウンロードしてください。<br />
+			　インストールファイルを任意のフォルダに解凍してください。</p>
 
-<h2><a name="id2_4"></a>更新履歴</h2>
+		<h2><a name="id2_4"></a>更新履歴</h2>
 
-<dl>
-<dt>ver0.1.00</dt>
-<dd>新規作成。</dd>
-</dl>
-</article>
+		<dl>
+			<dt>ver0.1.00</dt>
+			<dd>新規作成。</dd>
+			<dt>ver0.2.00</dt>
+			<dd>URLに対応するファイルがないとき、コンテキストパス直下にファイル404.htmlがあれば、その内容を返すよう修正しました。</dd>
+			<dd>404.htmlが無ければ従来どおり 404 Not Foundを返します。</dd>
+		</dl>
+	</article>
 
-<footer class="container">
-<a href="index.html">戻る</a>
-</footer>
+	<footer class="container">
+		<a href="index.html">戻る</a>
+	</footer>
 
 </body>
+
 </html>

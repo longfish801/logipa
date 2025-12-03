@@ -3,7 +3,7 @@
 
 ■ダウンロード
 
-・【リンク：logipa-0.1.00.zip：release/logipa-0.1.00.zip】
+・【リンク：logipa-0.2.00.zip：release/logipa-0.2.00.zip】
 
 ■必要な環境
 
